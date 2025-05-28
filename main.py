@@ -1,6 +1,9 @@
 from modules import functions as fn
+import time
 
 print("Welcome to TodoList app!")
+now = time.strftime("%Y %b %d, %H:%M:%S")
+print(now)
 user_prompt = "Enter a todo: "
 action_prompt = "Type add, show, edit, complete or exit: "
 ask_prompt = "Number of the todo to edit: "
