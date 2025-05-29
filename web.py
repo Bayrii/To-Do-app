@@ -1,6 +1,4 @@
 import streamlit as st
-from streamlit import checkbox
-
 from modules import functions as fn
 
 todos = fn.get_todos()
@@ -9,6 +7,7 @@ def add_todo():
     todo_local = st.session_state["new todo"] + "\n"
     todos.append(todo_local)
     fn.write_todos(todos)
+    st.session_state["new todo"] = ""
 
 
 st.title("🚀 Launch Your Day with Purpose")
@@ -18,11 +17,11 @@ st.write("This app helps you break big goals "
 
 with st.container(height=400):
     for index, todo in enumerate(todos):
-        checkbox = st.checkbox(todo, key=todo)
+        checkbox = st.checkbox(todo, key=f"{todo}-{index}")
         if checkbox:
             todos.pop(index)
             fn.write_todos(todos)
-            del st.session_state[todo]
+            del st.session_state[f"{todo}-{index}"]
             st.rerun()
 
 
